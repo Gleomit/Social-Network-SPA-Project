@@ -1,0 +1,1 @@
+var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
