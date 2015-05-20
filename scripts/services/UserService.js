@@ -3,17 +3,16 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.factory('UserService', function(baseUrl, $q, $http) {
 	var serviceUrl = baseUrl + 'users/';
 
-	function login(username, password) {
-		var data = {
-			username: username,
-			password: password
-		};
-
-		return $http.post(serviceUrl + 'Login', data);
+	function login(loginData) {
+		return $http.post(serviceUrl + 'Login', loginData);
 	}
 
 	function logout() {
-		return $http.post(serviceUrl + 'Register', null);
+		var headers = {
+			Authorization: 'bearer ' + JSON.parse(sessionStorage['user']).access_token
+		};
+
+		return $http.post(serviceUrl + 'Logout', null, { headers: headers});
 	}
 
 	function register(registerData) {
