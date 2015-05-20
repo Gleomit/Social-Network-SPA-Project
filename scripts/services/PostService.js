@@ -1,6 +1,6 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('PostService', [function(baseUrl, $q, $http) {
+socialNetwork.factory('PostService', function(baseUrl, $q, $http) {
 	var serviceUrl = baseUrl + 'Posts/';
 
 	var config = {
@@ -44,4 +44,4 @@ socialNetwork.factory('PostService', [function(baseUrl, $q, $http) {
 	return {
 
 	};
-}])
+});

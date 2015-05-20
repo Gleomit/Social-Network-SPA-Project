@@ -1,13 +1,7 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('UserService', [function(baseUrl, $q, $http) {
+socialNetwork.factory('UserService', function(baseUrl, $q, $http) {
 	var serviceUrl = baseUrl + 'users/';
-
-	var config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
 
 	function login(username, password) {
 		var data = {
@@ -15,41 +9,39 @@ socialNetwork.factory('UserService', [function(baseUrl, $q, $http) {
 			password: password
 		};
 
-		return $http.post(serviceUrl + 'Login', data, config);
+		return $http.post(serviceUrl + 'Login', data);
 	}
 
 	function logout() {
-
-		return $http.post(serviceUrl + 'Register', null, config);
+		return $http.post(serviceUrl + 'Register', null);
 	}
 
 	function register(registerData) {
-		return $http.post(serviceUrl + 'Register', registerData, config);
+		return $http.post(serviceUrl + 'Register', registerData);
 	}
 
 	function previewUser(username) {
-		return $http.get(serviceUrl + username + '/preview', config);
+		return $http.get(serviceUrl + username + '/preview');
 	}
 
 	function searchUser(data) {
-		return $http.get(serviceUrl + 'search?searchTerm=' + data, config);
+		return $http.get(serviceUrl + 'search?searchTerm=' + data);
 	}
 
 	function userInfo(username) {
-		return $http.get(serviceUrl + username, config);
+		return $http.get(serviceUrl + username);
 	}
 
 	function userWall(data) {
-		return $http.get(serviceUrl + username + '/wall?StartPostId=' + data.startPostId
-		 + '&PageSize=' + data.pageSize, config);
+		return $http.get(serviceUrl + username + '/wall?StartPostId=' + data.startPostId + '&PageSize=' + data.pageSize);
 	}
 
 	function userFriends(username) {
-		return $http.get(serviceUrl + username + '/friends', config);
+		return $http.get(serviceUrl + username + '/friends');
 	}
 
 	function userFriendsPreview(username) {
-		return $http.get(serviceUrl + username + '/friends/preview', config);
+		return $http.get(serviceUrl + username + '/friends/preview');
 	}
 
 
@@ -58,4 +50,4 @@ socialNetwork.factory('UserService', [function(baseUrl, $q, $http) {
 		register: register,
 		logout: logout
 	};
-}])
+});

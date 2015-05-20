@@ -1,0 +1,26 @@
+<form id="login-form" name="loginForm" novalidate ng-submit="Login()">
+	<div class="form-group">
+		<input type="text" ng-model="login.username" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" required>
+		<div ng-show="loginForm.username.$dirty">
+			 <span ng-show="loginForm.username.$error.required">Username is required.</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="password" ng-model="login.password" ng-minlength="6" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
+		<div ng-show="loginForm.password.$dirty">
+			 <span ng-show="loginForm.password.$error.required">Password is required.</span>
+			 <span ng-show="loginForm.password.$error.minlength">Password must be 6 symbols at least.</span>
+		</div>
+	</div>
+	<div class="form-group text-center">
+		<input type="checkbox" ng-model="login.rememberMe" tabindex="3" name="remember" id="remember">
+		<label for="remember"> Remember Me</label>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<input type="submit" ng-disabled="!loginForm.$valid" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+			</div>
+		</div>
+	</div>
+</form>

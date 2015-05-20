@@ -1,6 +1,6 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('ProfileService', [function(baseUrl, $q, $http) {
+socialNetwork.factory('ProfileService', function(baseUrl, $q, $http) {
 	var serviceUrl = baseUrl + "me/";
 
 	var config = {
@@ -46,4 +46,4 @@ socialNetwork.factory('ProfileService', [function(baseUrl, $q, $http) {
 	return {
 
 	};
-}])
+});

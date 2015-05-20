@@ -2,11 +2,16 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 
 socialNetwork.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
-		$locationProvider.html5Mode(true);
 
 		$routeProvider.when('/', {
-			templateUrl: 'views/',
-			controller: ''
+			templateUrl: 'views/home.html',
+			controller: 'UserController'
+		}).when('/login', {
+			templateUrl: 'views/login.html',
+			controller: 'UserController'
+		}).when('/register', {
+			templateUrl: 'views/register.html',
+			controller: 'UserController'
 		}).otherwise({
 			redirectTo: '/'
 		});
