@@ -4,16 +4,21 @@ socialNetwork.constant('baseUrl', 'http://softuni-social-network.azurewebsites.n
 socialNetwork.constant('profileImageSizeLimit', 128);
 socialNetwork.constant('coverImageSizeLimit', 1024);
 
-socialNetwork.constant('getHeaders', function() {
-	var headers = {};
+socialNetwork.constant('getConfig', function() {
+	var config = {
+		headers: {}
+	};
 
-	if (localStorage['rememberMe'] && localStorage['rememberMe'] == true && localStorage['sessionToken']) {
-		headers.Authorization = 'Bearer ' + localStorage['sessionToken'];
-	} else if (sessionStorage['sessionToken']) {
-		headers.Authorization = 'Bearer ' + sessionStorage['sessionToken'];
+	var userLocalStorage = (localStorage['user'] ? JSON.parse(localStorage['user']) : undefined);
+	var userSessionStorage = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : undefined);
+
+	if (userLocalStorage && userLocalStorage.rememberMe == true && userLocalStorage.access_token) {
+		config.headers.Authorization = 'Bearer ' + userLocalStorage.access_token;
+	} else if (userSessionStorage && userSessionStorage.access_token) {
+		config.headers.Authorization = 'Bearer ' + userSessionStorage.access_token;
 	}
 
-	return headers;
+	return config;
 });
 
 socialNetwork.run(function($http) {

@@ -5,13 +5,10 @@ socialNetwork.config(['$routeProvider', '$locationProvider',
 
 		$routeProvider.when('/', {
 			templateUrl: 'views/home.html',
-			controller: 'UserController'
-		}).when('/login', {
-			templateUrl: 'views/login.html',
-			controller: 'UserController'
-		}).when('/register', {
-			templateUrl: 'views/register.html',
-			controller: 'UserController'
+		}).when('/profile', {
+			templateUrl: 'views/editProfile.html'
+		}).when('/profile/password', {
+			templateUrl: 'views/changePassword.html',
 		}).otherwise({
 			redirectTo: '/'
 		});

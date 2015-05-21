@@ -1,49 +1,43 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('ProfileService', function(baseUrl, $q, $http) {
+socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) {
 	var serviceUrl = baseUrl + "me/";
 
-	var config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
 	function myInfo() {
-		return $http.get(serviceUrl, config);
+		return $http.get(serviceUrl, getConfig());
 	}
 
 	function changeMyInfo(userData) {
-		return $http.put(serviceUrl, userData, config);
+		return $http.put(serviceUrl, userData);
 	}
 
 	function changePassword(passwordData) {
-		return $http.put(serviceUrl + 'ChangePassword', passwordData, config);
+		return $http.put(serviceUrl + 'ChangePassword', passwordData);
 	}
 
 	function getMyFriends() {
-		return $http.get(serviceUrl + 'friends', config);
+		return $http.get(serviceUrl + 'friends');
 	}
 
 	function getFeedNews(newsData) {
 		return $http.get(serviceUrl + 'feed?StartPostId=' + newsData.startPostId 
-			+ '&PageSize=' + newsData.pageSize, config);
+			+ '&PageSize=' + newsData.pageSize);
 	}
 
 	function getFriendRequests(respondData) {
-		return $http.get(serviceUrl + 'requests', config);
+		return $http.get(serviceUrl + 'requests');
 	}
 
 	function respondToRequest(respondData) {
 		return $http.put(serviceUrl + 'requests/' + respondData.requestId
-		 + '?status=' + respondData.status, config);
+		 + '?status=' + respondData.status);
 	}
 
 	function makeFriendRequest(requestData) {
-		return $http.post(serviceUrl + 'requests/' + requestData.username, null, config);
+		return $http.post(serviceUrl + 'requests/' + requestData.username, null);
 	}
 
 	return {
-
+		myInfo: myInfo
 	};
 });

@@ -3,46 +3,40 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.factory('CommentService', function($q, $http) {
 	var serviceUrl = baseUrl + 'Posts/';
 
-	var config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
 	function getComments(postId) {
-		return $http.get(serviceUrl + id + '/comments', config);
+		return $http.get(serviceUrl + id + '/comments');
 	}
 
 	function commentPost(postId, commentData) {
-		return $http.post(serviceUrl + id + '/comments', commentData, config);
+		return $http.post(serviceUrl + id + '/comments', commentData);
 	}
 
 	function editComment(postId, commentId, commentData) {
-		return $http.put(serviceUrl + id + '/comments/' + commentId, commentData, config);
+		return $http.put(serviceUrl + id + '/comments/' + commentId, commentData);
 	}
 
 	function deleteComment(postId, commentId) {
-		return $http.delete(serviceUrl + id + '/comments/' + commentId, config);
+		return $http.delete(serviceUrl + id + '/comments/' + commentId);
 	}
 
 	function getCommentLikes(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes', config);
+		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes');
 	}
 
 	function getCommentLikes(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes/preview', config);
+		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes/preview');
 	}
 
 	function getPostLikesPreview(id) {
-		return $http.get(serviceUrl + id + '/likes/preview', config);
+		return $http.get(serviceUrl + id + '/likes/preview');
 	}
 
 	function likeComment(postId, commentId) {
-		return $http.post(serviceUrl + id + '/comments' + commentId + '/likes', null, config);
+		return $http.post(serviceUrl + id + '/comments' + commentId + '/likes', null);
 	}
 
 	function unlikeComment(postId, commentId) {
-		return $http.delete(serviceUrl + id + '/comments' + commentId + '/likes', config);
+		return $http.delete(serviceUrl + id + '/comments' + commentId + '/likes');
 	}
 
 	return {

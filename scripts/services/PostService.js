@@ -3,42 +3,36 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.factory('PostService', function(baseUrl, $q, $http) {
 	var serviceUrl = baseUrl + 'Posts/';
 
-	var config = {
-		headers: {
-			'Content-Type': 'application/json'
-		}
-	};
-
 	function getPost(id) {
-		return $http.get(serviceUrl + id, config);
+		return $http.get(serviceUrl + id);
 	}
 
 	function getPostLikes(id) {
-		return $http.get(serviceUrl + id + '/likes', config);
+		return $http.get(serviceUrl + id + '/likes');
 	}
 
 	function getPostLikesPreview(id) {
-		return $http.get(serviceUrl + id + '/likes/preview', config);
+		return $http.get(serviceUrl + id + '/likes/preview');
 	}
 
 	function likePost(id) {
-		return $http.post(serviceUrl + id + '/likes', null, config);
+		return $http.post(serviceUrl + id + '/likes', null);
 	}
 
 	function unlikePost(id) {
-		return $http.delete(serviceUrl + id + '/likes', config);
+		return $http.delete(serviceUrl + id + '/likes');
 	}
 
 	function createPost(postData) {
-		return $http.post(serviceUrl, postData, config);
+		return $http.post(serviceUrl, postData);
 	}
 
 	function editPost(id) {
-		return $http.put(serviceUrl + id, config);
+		return $http.put(serviceUrl + id);
 	}
 
 	function deletePost(id) {
-		return $http.delete(serviceUrl + id, config);
+		return $http.delete(serviceUrl + id);
 	}
 	
 	return {
