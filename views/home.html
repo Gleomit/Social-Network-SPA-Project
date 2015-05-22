@@ -1,4 +1,4 @@
-<div ng-if="mainCtrl.Logged == false" class="text-center col-lg-12" ng-controller="UserController">
+<div ng-if="mainCtrl.Logged == false" class="text-center" ng-controller="UserController">
 	<h1 class="text-center">Social Network</h1>
 	<div class="col-lg-3 col-lg-offset-2">
 		<h3>Login</h3>
@@ -14,7 +14,7 @@
 </div>
 <div ng-if="mainCtrl.Logged == true">
 	<h1>News Feed</h1>
-	<div class="container col-lg-12" ng-controller="NewsFeedController">
+	<div class="container" ng-controller="NewsFeedController">
 		<div class="col-md-offset-1 col-md-5">
 			<div ng-repeat="post in news">
 				
