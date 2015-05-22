@@ -85,7 +85,7 @@ socialNetwork.factory('UserService', function(baseUrl, getConfig, $q, $http) {
 	}
 
 	function userWall(data) {
-		return $http.get(serviceUrl + username + '/wall?StartPostId=' + data.startPostId +
+		return $http.get(serviceUrl + data.username + '/wall?StartPostId=' +
 		 '&PageSize=' + data.pageSize, getConfig());
 	}
 

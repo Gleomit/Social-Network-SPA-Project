@@ -3,7 +3,7 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.controller('HeaderController', function($scope, $location,
 	UserService, ProfileService, NotificationService) {
 	$scope.Me = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : undefined);
-
+	$scope.searchResults = [];
 	$scope.Logout = function() {
 		UserService.logout()
 			.then(function(result) {
@@ -17,7 +17,7 @@ socialNetwork.controller('HeaderController', function($scope, $location,
 	};
 
 	$scope.getFriendRequests = function(event) {
-		event.preventDefault();
+		
 		ProfileService.getFriendRequests()
 			.then(function(result) {
 				$scope.friendRequests = result.data;
@@ -27,13 +27,22 @@ socialNetwork.controller('HeaderController', function($scope, $location,
 			});
 	};
 
+	$scope.rejectFriendRequest = function(){
+
+	};
+
+	$scope.approveFriendRequest = function(){
+
+	};
+
 	$scope.makeSearch = function() {
 		if ($scope.userSearch) {
-			UserService.searchUser($scope.userSearch).then(function(result) {
-				console.log(result);
-			}, function(error) {
+			UserService.searchUser($scope.userSearch)
+				.then(function(result) {
+					$scope.searchResults = result.data;
+				}, function(error) {
 
-			});
+				});
 		}
 	};
 });

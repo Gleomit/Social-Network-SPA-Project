@@ -15,16 +15,22 @@
 <div ng-if="mainCtrl.Logged == true">
 	<h1>News Feed</h1>
 	<div class="container" ng-controller="NewsFeedController">
-		<div class="col-md-offset-1 col-md-5">
+		<div class="col-md-offset-1 col-md-5 userWall">
 			<div ng-repeat="post in news">
-				
 				<div ng-repeat="comment in news.comments">
 					
 				</div>
 			</div>
 		</div>
 		<div class="col-md-offset-1 col-md-4">
-			
+			<div class="panel panel-default">
+				<div class="panel-heading">Friends - {{totalCount}} total</div>
+				<div class="panel-body">
+					<div class="friend col-md-1" ng-repeat="friend in friends">
+						<img src="friend.profileImageData">
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

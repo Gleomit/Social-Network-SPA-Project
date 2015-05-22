@@ -1,19 +1,35 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
 socialNetwork.controller('EditProfileController', function($scope, ProfileService, NotificationService) {
-	ProfileService.myInfo()
-		.then(function(result) {
-			$scope.profile = result.data;
-			$scope.edit = result.data;
-		}, function(error) {
-			console.log(error);
-		});
-
+	loadMyProfile();
 	attachUploadHandler();
 
 	$scope.editProfile = function() {
+		var dataToSave = {
+			coverImageData: $scope.edit.coverImageData,
+			profileImageData: $scope.edit.profileImageData,
+			name: $scope.edit.name,
+			email: $scope.edit.email,
+			gender: $scope.edit.gender
+		};
 
+		ProfileService.changeMyInfo(dataToSave)
+			.then(function(result) {
+				console.log(result);
+			}, function(error) {
+				console.log(error);
+			});
 	};
+
+	function loadMyProfile() {
+		ProfileService.myInfo()
+			.then(function(result) {
+				$scope.profile = result.data;
+				$scope.edit = result.data;
+			}, function(error) {
+				console.log(error);
+			});
+	}
 
 	function attachUploadHandler() {
 		$('#profilePictureButton').on('click', function(event) {

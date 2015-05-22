@@ -10,7 +10,12 @@
 	<div class="col-md-4">
 		<div class="btn-group" role="group" aria-label="">
 			<a href="#/home" class="btn btn-default glyphicon glyphicon-home"></a>
-			<a href="#" ng-click="getFriendRequests($event)" class="btn btn-default glyphicon glyphicon-user"></a>
+			<button type="button" ng-click="getFriendRequests($event)" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></button>
+			<ul class="dropdown-menu" role="menu">
+				<li ng-repeat="friendRequest in friendRequests">
+					{{friendRequest.username}}
+				</li>
+			</ul>
 			<a href="#/profile" class="btn btn-default glyphicon glyphicon-cog"></a>
 			<a href="#/profile/password" class="btn btn-default glyphicon glyphicon-pencil"></a>
 			<a ng-click="Logout()" class="btn btn-default glyphicon glyphicon-log-out"></a>
@@ -27,6 +32,17 @@
 						</button>
 					</span>
 				</div>
+				<div class="searchResults" ng-if="userSearch.length > 0">
+					<ul >
+						<li ng-repeat="result in searchResults" class="searchResult">
+							<a href="#/users/{{result.username}}" class="userResult">
+								<img src="{{result.profileImageData}}" width="50" height="50">
+							</a>
+							<span>{{result.username}}</span>
+						</li>	
+					</ul>
+					<p>Total results - {{searchResults.length}}</p>
+				</div>	
 			</div>
 		</div>
 	</div>

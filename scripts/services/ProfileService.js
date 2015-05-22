@@ -19,6 +19,10 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 		return $http.get(serviceUrl + 'friends', getConfig());
 	}
 
+	function getMyFriendsPreview() {
+		return $http.get(serviceUrl + 'friends/preview', getConfig());
+	}
+
 	function getFeedNews(newsData) {
 		return $http.get(serviceUrl + 'feed?StartPostId=' + newsData.startPostId 
 			+ '&PageSize=' + newsData.pageSize, getConfig());
@@ -42,6 +46,7 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 		getFriendRequests: getFriendRequests,
 		getFeedNews: getFeedNews,
 		getMyFriends: getMyFriends,
+		getMyFriendsPreview: getMyFriendsPreview,
 		makeFriendRequest: makeFriendRequest,
 		changePassword: changePassword,
 		changeMyInfo: changeMyInfo

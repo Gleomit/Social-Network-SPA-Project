@@ -120,3 +120,50 @@ input[type="file"] {
     position:absolute;
     display:none !important;
 }
+
+.fb-profile img.fb-image-lg{
+    z-index: 0;
+    width: 100%;  
+    height: 200px;
+    margin-bottom: 10px;
+}
+
+.fb-image-profile
+{
+    margin: -170px 10px 0px 50px;
+    z-index: 9;
+    width: 20%; 
+    height: 150px;
+}
+
+@media (max-width:768px)
+{
+    
+.fb-profile-text>h1{
+    font-weight: 700;
+    font-size:16px;
+}
+
+.fb-image-profile
+{
+    margin: -100px 10px 0px 25px;
+    z-index: 9;
+    width: 20%;
+    height: 100px; 
+}
+}
+
+.searchResults {
+	display:block;
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.searchResults ul {
+	list-style: none;
+	margin: 0;
+}
+
+.userWall{
+	border: 1px solid black;
+}
