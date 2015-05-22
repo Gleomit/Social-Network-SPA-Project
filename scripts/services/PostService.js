@@ -1,38 +1,38 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('PostService', function(baseUrl, $q, $http) {
+socialNetwork.factory('PostService', function(baseUrl, getConfig, $q, $http) {
 	var serviceUrl = baseUrl + 'Posts/';
 
 	function getPost(id) {
-		return $http.get(serviceUrl + id);
+		return $http.get(serviceUrl + id, getConfig());
 	}
 
 	function getPostLikes(id) {
-		return $http.get(serviceUrl + id + '/likes');
+		return $http.get(serviceUrl + id + '/likes', getConfig());
 	}
 
 	function getPostLikesPreview(id) {
-		return $http.get(serviceUrl + id + '/likes/preview');
+		return $http.get(serviceUrl + id + '/likes/preview', getConfig());
 	}
 
 	function likePost(id) {
-		return $http.post(serviceUrl + id + '/likes', null);
+		return $http.post(serviceUrl + id + '/likes', null, getConfig());
 	}
 
 	function unlikePost(id) {
-		return $http.delete(serviceUrl + id + '/likes');
+		return $http.delete(serviceUrl + id + '/likes', getConfig());
 	}
 
 	function createPost(postData) {
-		return $http.post(serviceUrl, postData);
+		return $http.post(serviceUrl, postData, getConfig());
 	}
 
 	function editPost(id) {
-		return $http.put(serviceUrl + id);
+		return $http.put(serviceUrl + id, getConfig());
 	}
 
 	function deletePost(id) {
-		return $http.delete(serviceUrl + id);
+		return $http.delete(serviceUrl + id, getConfig());
 	}
 	
 	return {

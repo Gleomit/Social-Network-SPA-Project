@@ -38,7 +38,6 @@ socialNetwork.factory('UserService', function(baseUrl, getConfig, $q, $http) {
 
 		$http.post(serviceUrl + 'Logout', null, getConfig())
 			.success(function(result) {
-				console.log(result);
 				removeCredentials();
 				deferred.resolve(result);
 			}).error(function(error) {
@@ -74,27 +73,28 @@ socialNetwork.factory('UserService', function(baseUrl, getConfig, $q, $http) {
 	}
 
 	function previewUser(username) {
-		return $http.get(serviceUrl + username + '/preview');
+		return $http.get(serviceUrl + username + '/preview', getConfig());
 	}
 
 	function searchUser(data) {
-		return $http.get(serviceUrl + 'search?searchTerm=' + data);
+		return $http.get(serviceUrl + 'search?searchTerm=' + data, getConfig());
 	}
 
 	function userInfo(username) {
-		return $http.get(serviceUrl + username, getConfig());
+		return $http.get(serviceUrl + username, getConfig(), getConfig());
 	}
 
 	function userWall(data) {
-		return $http.get(serviceUrl + username + '/wall?StartPostId=' + data.startPostId + '&PageSize=' + data.pageSize);
+		return $http.get(serviceUrl + username + '/wall?StartPostId=' + data.startPostId +
+		 '&PageSize=' + data.pageSize, getConfig());
 	}
 
 	function userFriends(username) {
-		return $http.get(serviceUrl + username + '/friends');
+		return $http.get(serviceUrl + username + '/friends', getConfig());
 	}
 
 	function userFriendsPreview(username) {
-		return $http.get(serviceUrl + username + '/friends/preview');
+		return $http.get(serviceUrl + username + '/friends/preview', getConfig());
 	}
 
 	function setCredentials(credentialsData) {
@@ -117,6 +117,10 @@ socialNetwork.factory('UserService', function(baseUrl, getConfig, $q, $http) {
 		login: login,
 		register: register,
 		logout: logout,
-		userInfo: userInfo
+		userInfo: userInfo,
+		userWall: userWall,
+		userFriendsPreview: userFriendsPreview,
+		userFriends: userFriends,
+		searchUser: searchUser
 	};
 });

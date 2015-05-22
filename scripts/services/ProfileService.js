@@ -8,36 +8,42 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 	}
 
 	function changeMyInfo(userData) {
-		return $http.put(serviceUrl, userData);
+		return $http.put(serviceUrl, userData, getConfig());
 	}
 
 	function changePassword(passwordData) {
-		return $http.put(serviceUrl + 'ChangePassword', passwordData);
+		return $http.put(serviceUrl + 'ChangePassword', passwordData, getConfig());
 	}
 
 	function getMyFriends() {
-		return $http.get(serviceUrl + 'friends');
+		return $http.get(serviceUrl + 'friends', getConfig());
 	}
 
 	function getFeedNews(newsData) {
 		return $http.get(serviceUrl + 'feed?StartPostId=' + newsData.startPostId 
-			+ '&PageSize=' + newsData.pageSize);
+			+ '&PageSize=' + newsData.pageSize, getConfig());
 	}
 
 	function getFriendRequests(respondData) {
-		return $http.get(serviceUrl + 'requests');
+		return $http.get(serviceUrl + 'requests', getConfig());
 	}
 
 	function respondToRequest(respondData) {
 		return $http.put(serviceUrl + 'requests/' + respondData.requestId
-		 + '?status=' + respondData.status);
+		 + '?status=' + respondData.status, getConfig());
 	}
 
 	function makeFriendRequest(requestData) {
-		return $http.post(serviceUrl + 'requests/' + requestData.username, null);
+		return $http.post(serviceUrl + 'requests/' + requestData.username, null, getConfig());
 	}
 
 	return {
-		myInfo: myInfo
+		myInfo: myInfo,
+		getFriendRequests: getFriendRequests,
+		getFeedNews: getFeedNews,
+		getMyFriends: getMyFriends,
+		makeFriendRequest: makeFriendRequest,
+		changePassword: changePassword,
+		changeMyInfo: changeMyInfo
 	};
 });

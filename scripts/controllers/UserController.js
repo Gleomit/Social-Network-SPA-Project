@@ -1,8 +1,7 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
-socialNetwork.controller('UserController', function($scope, $location, UserService, NotificationService) {
+socialNetwork.controller('UserController', function($scope, UserService, NotificationService) {
 	$scope.register = {};
 	$scope.login = {};
-	$scope.Logged = (localStorage['user'] || sessionStorage['user'] ? true : false);
 
 	$scope.Login = function() {
 		var loginData = {
@@ -12,8 +11,7 @@ socialNetwork.controller('UserController', function($scope, $location, UserServi
 
 		UserService.login(loginData)
 			.then(function(result) {
-				//console.log(result);
-				$scope.Logged = true;
+				$scope.mainCtrl.Logged = true;
 				resetLogin();
 			}, function(error) {
 				console.log(error);
@@ -33,24 +31,11 @@ socialNetwork.controller('UserController', function($scope, $location, UserServi
 
 		UserService.register(registerData)
 			.then(function(result) {
-				$scope.Logged = true;
+				$scope.mainCtrl.Logged = true;
 				resetRegister();
 			}, function(error) {
 				console.log(error);
 				resetRegister();
-			});
-	};
-
-	$scope.Logout = function() {
-		UserService.logout()
-			.then(function(result) {
-				console.log(result);
-				$location.path('/');
-				$scope.Logged = false;
-			}, function(error) {
-				console.log(error);
-				$location.path('/');
-				$scope.Logged = false;
 			});
 	};
 
