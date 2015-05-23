@@ -89,7 +89,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 
 	};
 
-	$scope.makePost = function(message) {
+	$scope.makePostt = function(message) {
 		var data = {
 			postContent: message,
 			username: $scope.userProfile.username

@@ -58,12 +58,26 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 
 	};
 
-	$scope.likePost = function(event) {
-
+	$scope.likePost = function(post) {
+		PostService.likePost(post.id)
+			.then(function(result){
+				post.liked = true;
+				post.likesCount += 1;
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
 	};
 
-	$scope.unlikePost = function(event) {
-
+	$scope.unlikePost = function(post) {
+		PostService.unlikePost(post.id)
+			.then(function(result){
+				post.liked = false;
+				post.likesCount -= 1;
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
 	};
 
 	$scope.editPost = function(event) {
@@ -73,7 +87,7 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 	$scope.makePost = function(message) {
 		var data = {
 			postContent: message,
-			username: JSON.parse(sessionStorage['user']).username
+			username: $scope.myProfile.username
 		};
 
 		PostService.createPost(data)
@@ -84,9 +98,9 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 			});
 	};
 
-	$scope.deletePost = function(event, postId) {
+	$scope.deletePost = function(post) {
 		event.preventDefault();
-		PostService.deletePost(postId)
+		PostService.deletePost(post.id)
 			.then(function(result){
 
 			}, function(error){
