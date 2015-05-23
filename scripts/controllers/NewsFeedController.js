@@ -3,7 +3,7 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 	NotificationService, PostService, CommentService) {
 	$scope.startPostId = 0;
-	$scope.pageSize = 5;
+	$scope.pageSize = 10;
 
 	loadNewsFeed();
 	loadFriendsPreview();
@@ -33,78 +33,4 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 			console.log(error);
 		});
 	}
-
-	$scope.previewUser = function(event) {
-
-	};
-
-	$scope.likeComment = function(event) {
-
-	};
-
-	$scope.makeComment = function(event) {
-
-	};
-
-	$scope.unlikeComment = function(event) {
-
-	};
-
-	$scope.editComment = function(event) {
-
-	};
-
-	$scope.deleteComment = function(event) {
-
-	};
-
-	$scope.likePost = function(post) {
-		PostService.likePost(post.id)
-			.then(function(result){
-				post.liked = true;
-				post.likesCount += 1;
-				console.log(result);
-			}, function(error){
-				console.log(error);
-			});
-	};
-
-	$scope.unlikePost = function(post) {
-		PostService.unlikePost(post.id)
-			.then(function(result){
-				post.liked = false;
-				post.likesCount -= 1;
-				console.log(result);
-			}, function(error){
-				console.log(error);
-			});
-	};
-
-	$scope.editPost = function(event) {
-
-	};
-
-	$scope.makePost = function(message) {
-		var data = {
-			postContent: message,
-			username: $scope.myProfile.username
-		};
-
-		PostService.createPost(data)
-			.then(function(result) {
-				console.log(result);
-			}, function(error) {
-				console.log(error);
-			});
-	};
-
-	$scope.deletePost = function(post) {
-		event.preventDefault();
-		PostService.deletePost(post.id)
-			.then(function(result){
-
-			}, function(error){
-
-			});
-	};
 });

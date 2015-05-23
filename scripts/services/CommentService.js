@@ -20,11 +20,11 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 	}
 
 	function getCommentLikes(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes', getConfig());
+		return $http.get(serviceUrl + id + '/comments/' + commentId + '/likes', getConfig());
 	}
 
 	function getCommentLikes(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments' + commentId + '/likes/preview', getConfig());
+		return $http.get(serviceUrl + id + '/comments/' + commentId + '/likes/preview', getConfig());
 	}
 
 	function getPostLikesPreview(id) {
@@ -32,14 +32,18 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 	}
 
 	function likeComment(postId, commentId) {
-		return $http.post(serviceUrl + id + '/comments' + commentId + '/likes', null, getConfig());
+		return $http.post(serviceUrl + postId + '/comments/' + commentId + '/likes', null, getConfig());
 	}
 
 	function unlikeComment(postId, commentId) {
-		return $http.delete(serviceUrl + id + '/comments' + commentId + '/likes', getConfig());
+		return $http.delete(serviceUrl + postId + '/comments/' + commentId + '/likes', getConfig());
 	}
 
 	return {
-
+		likeComment: likeComment,
+		unlikeComment: unlikeComment,
+		deleteComment: deleteComment,
+		editComment: editComment,
+		getComments: getComments
 	};
 });

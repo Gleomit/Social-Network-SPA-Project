@@ -9,7 +9,7 @@
 		</div>
 	</div>
 	<div>
-		<div class=" col-md-7 userNews">
+		<div class=" col-md-7 userNews" ng-controller="PostsController">
 			<ul class="media-list">
 				<li class="media post" ng-repeat="post in userProfile.posts" data-id="{{post.id}}">
 					<a class="pull-left" href="#">
@@ -28,18 +28,18 @@
 								<span>{{post.likesCount}}</span>
 								<span ng-if="!post.liked">
 									<span class="glyphicon glyphicon-thumbs-up"></span>
-									<a href="#" ng-click="likePost($event)">Like</a>
+									<button type="button" ng-click="likePost(post)">Like</button>
 								</span>
 								<span ng-if="post.liked">
 									<span class="glyphicon glyphicon-thumbs-down"></span>
-									<a href="#" ng-click="unlikePost($event)">Unlike</a>
+									<button type="button" ng-click="unlikePost(post)">Unlike</button>
 								</span>
 							</span>
 							<a data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> {{post.totalCommentsCount}} comments</a>
 							<span ng-if="post.author.username == myProfile.username">
 								<!-- <span class="glyphicon glyphicon-thumbs-down"></span> -->
-								<a href="#" class="btn btn-danger" ng-click="deleteComment($event)">Delete</a>
-								<a href="#" class="btn btn-info" ng-click="editComment($event)">Edit</a>
+								<button type="button" class="btn btn-danger" ng-click="deletePost(post)">Delete</button>
+								<button type="button" class="btn btn-info" ng-click="editPost(post)">Edit</button>
 							</span>
 						</div>
 					</div>
@@ -61,16 +61,16 @@
 										<span>{{comment.likesCount}}</span>
 										<span ng-if="!comment.liked">
 											<span class="glyphicon glyphicon-thumbs-up"></span>
-											<a href="#" ng-click="likeComment($event)">Like</a>
+											<button type="button" ng-click="likeComment(post, comment)">Like</button>
 										</span>
 										<span ng-if="comment.liked">
 											<span class="glyphicon glyphicon-thumbs-down"></span>
-											<a href="#" ng-click="unlineComment($event)">Unlike</a>
+											<button type="button" ng-click="unlikeComment(post, comment)">Unlike</button>
 										</span>
 										<span ng-if="comment.author.username == myProfile.username">
 											<!-- <span class="glyphicon glyphicon-thumbs-down"></span> -->
-											<a href="#" class="btn btn-danger" ng-click="deleteComment($event)">Delete</a>
-											<a href="#" class="btn btn-info" ng-click="editComment($event)">Edit</a>
+											<button type="button" class="btn btn-danger" ng-click="deleteComment(post, comment)">Delete</button>
+											<button type="button" class="btn btn-info" ng-click="editComment($event)">Edit</button>
 										</span>
 									</span>
 								</div>
@@ -85,7 +85,7 @@
 				<div class="well">
 					<form accept-charset="UTF-8" class="text-center">
 						<textarea class="form-control" ng-model="postMessage" placeholder="Type in your message" ></textarea>
-						<button class="btn btn-info" ng-click="makePostt(postMessage)" ng-disabled="$postMessage.length <= 0" type="button">Post Message</button>
+						<button class="btn btn-info" ng-click="makePost(postMessage)" ng-disabled="$postMessage.length <= 0" type="button">Post Message</button>
 					</form>
 				</div>
 			</div>

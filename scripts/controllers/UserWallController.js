@@ -77,19 +77,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			});
 	}
 
-	$scope.likePost = function(event) {
-
-	};
-
-	$scope.unlikePost = function(event) {
-
-	};
-
-	$scope.editPost = function(event) {
-
-	};
-
-	$scope.makePostt = function(message) {
+	$scope.makePost = function(message) {
 		var data = {
 			postContent: message,
 			username: $scope.userProfile.username
@@ -101,9 +89,5 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			}, function(error){
 				console.log(error);
 			});
-	};
-
-	$scope.deletePost = function(event) {
-
 	};
 });
