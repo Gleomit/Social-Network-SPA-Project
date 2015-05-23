@@ -12,6 +12,7 @@ socialNetwork.controller('UserController', function($scope, UserService, Notific
 		UserService.login(loginData)
 			.then(function(result) {
 				$scope.mainCtrl.Logged = true;
+				$scope.myProfile = result;
 				resetLogin();
 			}, function(error) {
 				console.log(error);

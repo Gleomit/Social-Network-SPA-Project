@@ -12,8 +12,8 @@ socialNetwork.factory('NotificationService', function() {
 		});
 	}
 	
-	function successNoty (layout, text){
-		notify('success', layout, text, 2000);	
+	function successNoty (text){
+		notify('success', 'topRight', text, 2000);	
 	}
 	
 	function errorNoty (layout, text){

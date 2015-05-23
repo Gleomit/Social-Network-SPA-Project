@@ -1,49 +1,77 @@
-<header ng-if="mainCtrl.Logged == true" class="col-lg-12" ng-controller="HeaderController">
-	<div class="col-md-1">
-		<a href="#" class="thumbnail">
-			<img ng-src="https://www.tripwell.com/assets/static/images/unknown_user.png" width="100" height="100" alt="Cannot load image">
-		</a>
-	</div>
-	<div class="col-md-2">
-		<h2>{{Me.name}}</h2>
-	</div>
-	<div class="col-md-4">
-		<div class="btn-group" role="group" aria-label="">
-			<a href="#/home" class="btn btn-default glyphicon glyphicon-home"></a>
-			<button type="button" ng-click="getFriendRequests($event)" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-user"></span></button>
-			<ul class="dropdown-menu" role="menu">
-				<li ng-repeat="friendRequest in friendRequests">
-					{{friendRequest.username}}
-				</li>
-			</ul>
-			<a href="#/profile" class="btn btn-default glyphicon glyphicon-cog"></a>
-			<a href="#/profile/password" class="btn btn-default glyphicon glyphicon-pencil"></a>
-			<a ng-click="Logout()" class="btn btn-default glyphicon glyphicon-log-out"></a>
+<header ng-if="mainCtrl.Logged == true" class="row" ng-controller="HeaderController">
+	<div class="navbar navbar-default" role="navigation">
+		
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#/">
+				<img class="thumbnail" src="{{Me.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="Cannot load image">
+			</a>
 		</div>
-	</div>
-	<div class="col-md-5">
-		<div class="col-sm-6 col-sm-offset-3">
-			<div id="imaginary_container">
-				<div class="input-group stylish-input-group">
-					<input type="text" class="form-control" ng-change="makeSearch()" ng-model="userSearch" placeholder="Search" >
-					<span class="input-group-addon">
-						<button type="submit">
-						<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
-				<div class="searchResults" ng-if="userSearch.length > 0">
-					<ul >
-						<li ng-repeat="result in searchResults" class="searchResult">
-							<a href="#/users/{{result.username}}" class="userResult">
-								<img src="{{result.profileImageData}}" width="50" height="50">
-							</a>
-							<span>{{result.username}}</span>
-						</li>	
+		
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="#/home" class="btn btn-default glyphicon glyphicon-home"></a></li>
+				<li class="dropdown">
+					<a href="#" ng-click="getFriendRequests($event)" class="btn btn-default dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"></a>
+					<ul class="dropdown-menu">
+						<li ng-repeat="friendRequest in friendRequests" data-id="{{friendRequest.id}}" class="friendRequest">
+							<div class="navbar-login">
+								<div class="row">
+									<div class="col-lg-4">
+										<p class="text-center">
+											<img src="{{friendRequest.user.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="70" height="70" alt="" />
+										</p>
+									</div>
+									<div class="col-lg-8">
+										<p class="text-left"><a href="#/users/{{friendRequest.user.username}}"><strong>{{friendRequest.user.username}}</strong></p></a>
+										<p class="text-left">
+											<a href="#" ng-click="approveFriendRequest($event)" class="btn btn-info">Approve</a>
+											<a href="#" ng-click="rejectFriendRequest($event)" class="btn btn-danger">Reject</a>
+										</p>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="divider"></li>
+						<li class="text-center">total results - {{friendRequests.length}}</li>
 					</ul>
-					<p>Total results - {{searchResults.length}}</p>
-				</div>	
+				</li>
+				<li><a href="#/profile" class="btn btn-default glyphicon glyphicon-cog"></a></li>
+				<li><a href="#/profile/password" class="btn btn-default glyphicon glyphicon-pencil"></a></li>
+				<li><a ng-click="Logout()" class="btn btn-default glyphicon glyphicon-log-out"></a></li>
+			</ul>
+			<div class="col-sm-3 col-md-3 pull-right">
+				<form class="navbar-form" role="search">
+					<div id="imaginary_container">
+						<div class="input-group stylish-input-group">
+							<input type="text" class="form-control" ng-change="makeSearch()" ng-model="userSearch" placeholder="Search" >
+							<span class="input-group-addon">
+								<button type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+						<div class="searchResults" ng-if="userSearch.length > 0">
+							<ul >
+								<li ng-repeat="result in searchResults" class="searchResult">
+									<a href="#/users/{{result.username}}" class="userResult">
+										<img src="{{result.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="50" height="50">
+									</a>
+									<span>{{result.username}}</span>
+								</li>
+							</ul>
+							<p>Total results - {{searchResults.length}}</p>
+						</div>
+					</div>
+				</form>
 			</div>
+			
 		</div>
 	</div>
+	
 </header>

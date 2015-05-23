@@ -36,6 +36,7 @@ socialNetwork.factory('PostService', function(baseUrl, getConfig, $q, $http) {
 	}
 	
 	return {
-
+		createPost: createPost,
+		deletePost: deletePost
 	};
 });

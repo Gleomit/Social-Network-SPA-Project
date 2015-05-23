@@ -103,7 +103,7 @@
 	background-color: #59B2E0;
 }
 
- .stylish-input-group .input-group-addon{
+.stylish-input-group .input-group-addon{
     background: white !important; 
 }
 .stylish-input-group .form-control{
@@ -136,23 +136,6 @@ input[type="file"] {
     height: 150px;
 }
 
-@media (max-width:768px)
-{
-    
-.fb-profile-text>h1{
-    font-weight: 700;
-    font-size:16px;
-}
-
-.fb-image-profile
-{
-    margin: -100px 10px 0px 25px;
-    z-index: 9;
-    width: 20%;
-    height: 100px; 
-}
-}
-
 .searchResults {
 	display:block;
 	border: 1px solid black;
@@ -162,8 +145,58 @@ input[type="file"] {
 .searchResults ul {
 	list-style: none;
 	margin: 0;
+	display: absolute;
 }
 
-.userWall{
-	border: 1px solid black;
+.navbar-brand img{
+	width: 70px;
+	height: 70px;
+}
+
+.mainContainer{
+	background-color: #eee;
+}
+
+.menuLocation{
+	border-bottom: 1px solid #000;
+	border-top: 1px solid #000;
+	margin-bottom: 15px;
+	padding-left: 10px;
+}
+
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
+.media-date { 
+    position: absolute; 
+    right: 25px;
+    top: 25px;
+}
+.media-date li { padding: 0; }
+.media-date li:first-child:before { content: ''; }
+.media-date li:before { 
+    content: '.'; 
+    margin-left: -2px; 
+    margin-right: 2px;
+}
+.media-comment { margin-bottom: 20px; }
+.media-replied { margin: 0 0 20px 50px; }
+.media-replied .media-heading { padding-left: 6px; }
+
+
+.friend, .friendsView{
+	padding:0;
 }

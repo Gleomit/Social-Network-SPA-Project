@@ -3,6 +3,7 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.constant('baseUrl', 'http://softuni-social-network.azurewebsites.net/api/');
 socialNetwork.constant('profileImageSizeLimit', 128);
 socialNetwork.constant('coverImageSizeLimit', 1024);
+socialNetwork.constant('defaultProfileImage', 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg');
 
 socialNetwork.constant('getConfig', function() {
 	var config = {

@@ -13,7 +13,7 @@ socialNetwork.controller('EditProfileController', function($scope, ProfileServic
 			gender: $scope.edit.gender
 		};
 
-		ProfileService.changeMyInfo(dataToSave)
+		ProfileService.editProfile(dataToSave)
 			.then(function(result) {
 				console.log(result);
 			}, function(error) {
@@ -22,7 +22,7 @@ socialNetwork.controller('EditProfileController', function($scope, ProfileServic
 	};
 
 	function loadMyProfile() {
-		ProfileService.myInfo()
+		ProfileService.getProfile()
 			.then(function(result) {
 				$scope.profile = result.data;
 				$scope.edit = result.data;

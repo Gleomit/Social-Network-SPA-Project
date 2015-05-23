@@ -1,4 +1,4 @@
-<div ng-if="mainCtrl.Logged == false" class="text-center" ng-controller="UserController">
+<div ng-if="mainCtrl.Logged == false" class="text-center" ng-controller="UserController as userCtrl">
 	<h1 class="text-center">Social Network</h1>
 	<div class="col-lg-3 col-lg-offset-2">
 		<h3>Login</h3>
@@ -13,21 +13,93 @@
 	</div>
 </div>
 <div ng-if="mainCtrl.Logged == true">
-	<h1>News Feed</h1>
-	<div class="container" ng-controller="NewsFeedController">
-		<div class="col-md-offset-1 col-md-5 userWall">
-			<div ng-repeat="post in news">
-				<div ng-repeat="comment in news.comments">
-					
+	<div class="menuLocation">
+		<h1>News Feed</h1>
+	</div>
+	<div ng-controller="NewsFeedController">
+		<div class="col-md-7 userNews">
+			<ul class="media-list">
+				<li class="media post" ng-repeat="post in news" data-id="{{post.id}}">
+					<a class="pull-left" href="#">
+						<img class="media-object img-square" src="{{post.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+					</a>
+					<div class="media-body">
+						<div class="well well-lg">
+							<h4 class="media-heading reviews"><a href="#/users/{{post.author.username}}">{{post.author.username}}</a></h4>
+							<div class="media-date text-uppercase reviews list-inline">
+								{{post.date | date: 'short'}}
+							</div>
+							<p class="media-comment">
+								{{post.postContent}}
+							</p>
+							<span>
+								<span>{{post.likesCount}}</span>
+								<span ng-if="!post.liked">
+									<span class="glyphicon glyphicon-thumbs-up"></span>
+									<a href="#" ng-click="likePost($event)">Like</a>
+								</span>
+								<span ng-if="post.liked">
+									<span class="glyphicon glyphicon-thumbs-down"></span>
+									<a href="#" ng-click="unlikePost($event)">Unlike</a>
+								</span>
+							</span>
+							<a data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> {{post.totalCommentsCount}} comments</a>
+							<a href="#" class="btn btn-danger" ng-click="deletePost($event, post.id)">Delete</a>
+							<span ng-if="post.author.username == myProfile.username">
+								<a href="#" class="btn btn-info" ng-click="editPost($event)">Edit</a>
+							</span>
+						</div>
+					</div>
+					<ul class="media-list">
+						<li class="media media-replied comment" ng-repeat="comment in post.comments" data-id="{{comment.id}}">
+							<a class="pull-left" href="#">
+								<img class="media-object img-square" src="{{comment.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+							</a>
+							<div class="media-body">
+								<div class="well well-lg">
+									<h4 class="media-heading reviews"><span class="glyphicon glyphicon-share-alt"></span><a href="#/users/{{comment.author.username}}">{{comment.author.username}}</a></h4>
+									<div class="media-date text-uppercase reviews list-inline">
+										{{comment.date | date: 'short'}}
+									</div>
+									<p class="media-comment">
+										{{comment.commentContent}}
+									</p>
+									<span>
+										<span>{{comment.likesCount}}</span>
+										<span ng-if="!comment.liked">
+											<span class="glyphicon glyphicon-thumbs-up"></span>
+											<a href="#" ng-click="likeComment($event)">Like</a>
+										</span>
+										<span ng-if="comment.liked">
+											<span class="glyphicon glyphicon-thumbs-down"></span>
+											<a href="#" ng-click="unlikeComment($event)">Unlike</a>
+										</span>
+									</span>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			
+		</div>
+		<div class="col-md-5">
+			<div class="row">
+				<div class="well">
+					<form accept-charset="UTF-8" class="text-center">
+						<textarea class="form-control" ng-model="postMessage" placeholder="Type in your message" ></textarea>
+						<button class="btn btn-info" ng-click="makePost(postMessage)" ng-disabled="postMessage.length <= 0" type="button">Post Message</button>
+					</form>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-offset-1 col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading">Friends - {{totalCount}} total</div>
+				<div class="panel-heading">Friends - <a href="#/users/{{mainCtrl.myProfile.username}}/friends">{{totalCount}}</a> total</div>
 				<div class="panel-body">
-					<div class="friend col-md-1" ng-repeat="friend in friends">
-						<img src="friend.profileImageData">
+					<div class="friend" ng-repeat="friend in friends">
+						<a href="#/users/{{friend.username}}">
+							<img class="friend col-md-4 thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="60" height="90">
+							<!-- <span>{{friend.name}}</span> -->
+						</a>
 					</div>
 				</div>
 			</div>

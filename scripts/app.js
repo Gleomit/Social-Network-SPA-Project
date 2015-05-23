@@ -2,7 +2,7 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 
 socialNetwork.config(['$routeProvider', '$locationProvider',
 	function($routeProvider, $locationProvider) {
-
+		
 		$routeProvider.when('/', {
 			templateUrl: 'views/home.html',
 		}).when('/profile', {
@@ -18,3 +18,19 @@ socialNetwork.config(['$routeProvider', '$locationProvider',
 		});
 	}
 ]);
+
+socialNetwork.run( function($rootScope, $location) {
+
+    var user = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : null);
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+      if (user == null ) {
+        // no logged user, we should be going to #login
+        if ( next.templateUrl == "views/home.html" ) {
+          // already going to #login, no redirect needed
+        } else {
+          // not going to #login, we should redirect now
+          $location.path( "/" );
+        }
+      }         
+    });
+ })

@@ -1,6 +1,6 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
-socialNetwork.factory('CommentService', function($q, $http, getConfig) {
+socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) {
 	var serviceUrl = baseUrl + 'Posts/';
 
 	function getComments(postId) {

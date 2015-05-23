@@ -3,11 +3,11 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) {
 	var serviceUrl = baseUrl + "me/";
 
-	function myInfo() {
+	function getProfile() {
 		return $http.get(serviceUrl, getConfig());
 	}
 
-	function changeMyInfo(userData) {
+	function editProfile(userData) {
 		return $http.put(serviceUrl, userData, getConfig());
 	}
 
@@ -15,17 +15,16 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 		return $http.put(serviceUrl + 'ChangePassword', passwordData, getConfig());
 	}
 
-	function getMyFriends() {
+	function getFriends() {
 		return $http.get(serviceUrl + 'friends', getConfig());
 	}
 
-	function getMyFriendsPreview() {
+	function getFriendsPreview() {
 		return $http.get(serviceUrl + 'friends/preview', getConfig());
 	}
 
 	function getFeedNews(newsData) {
-		return $http.get(serviceUrl + 'feed?StartPostId=' + newsData.startPostId 
-			+ '&PageSize=' + newsData.pageSize, getConfig());
+		return $http.get(serviceUrl + 'feed?StartPostId=&PageSize=' + newsData.pageSize, getConfig());
 	}
 
 	function getFriendRequests(respondData) {
@@ -34,7 +33,7 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 
 	function respondToRequest(respondData) {
 		return $http.put(serviceUrl + 'requests/' + respondData.requestId
-		 + '?status=' + respondData.status, getConfig());
+		 + '?status=' + respondData.status, null, getConfig());
 	}
 
 	function makeFriendRequest(requestData) {
@@ -42,13 +41,14 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 	}
 
 	return {
-		myInfo: myInfo,
+		getProfile: getProfile,
 		getFriendRequests: getFriendRequests,
 		getFeedNews: getFeedNews,
-		getMyFriends: getMyFriends,
-		getMyFriendsPreview: getMyFriendsPreview,
+		getFriends: getFriends,
+		getFriendsPreview: getFriendsPreview,
 		makeFriendRequest: makeFriendRequest,
+		respondToRequest: respondToRequest,
 		changePassword: changePassword,
-		changeMyInfo: changeMyInfo
+		editProfile: editProfile
 	};
 });
