@@ -9,9 +9,9 @@
     <div class="panel-body">
       <div ng-repeat="friend in userFriends | filter: {name: friendsSearch}">
         <a href="#/users/{{friend.username}}">
-        <div class="panel panel-default col-md-4 text-center friend"><div class="panel-heading">{{friend.name}}</div><div class="panel-body"><img class="thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="110" height="90"></div></div></a>
+          <div class="panel panel-default col-md-4 text-center friend"><div class="panel-heading">{{friend.name}}</div><div class="panel-body"><img class="thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="110" height="90"></div></div></a>
+        </div>
       </div>
     </div>
+    <h1 ng-if="!userProfile.isFriend && !userProfile.username == myProfile.username">You must be friend with {{userProfile.username}} in order to see his friends</h1>
   </div>
-  <h1 ng-if="!userProfile.isFriend">You must be friend with {{userProfile.username}} in order to see his friends</h1>
-</div>

@@ -24,7 +24,6 @@ socialNetwork.run( function($rootScope, $location) {
     var user = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : null);
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
       if (user == null ) {
-        // no logged user, we should be going to #login
         if ( next.templateUrl == "views/home.html" ) {
           // already going to #login, no redirect needed
         } else {

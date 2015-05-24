@@ -14,7 +14,7 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 			startPostId: '',
 			pageSize: $scope.pageSize
 		};
-
+		console.log($scope.myProfile)
 		ProfileService.getFeedNews(newsData)
 			.then(function(result) {
 				console.log(result)
@@ -26,7 +26,6 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 
 	function loadFriendsPreview() {
 		ProfileService.getFriendsPreview().then(function(result) {
-			console.log(result.data.friends)
 			$scope.myProfile.friends = result.data.friends;
 			$scope.myProfile.totalCount = result.data.totalCount;
 		}, function(error) {

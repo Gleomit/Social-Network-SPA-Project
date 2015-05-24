@@ -90,19 +90,13 @@
 				</li>
 			</ul>
 				<div class="text-center">
-					<button type="button" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
+					<button type="button" ng-if="newsFeed.length >= 5" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
 				</div>
 			</div>
 			<div ng-include="'views/commentLikesModal.html'"></div>
 			<div ng-include="'views/postLikesModal.html'"></div>
 			<div ng-include="'views/commentEditModal.html'"></div>
 			<div ng-include="'views/postEditModal.html'"></div>
-		</div>
-		<div class="tooltip top" role="tooltip">
-			<div class="tooltip-arrow"></div>
-			<div class="tooltip-inner">
-				Some tooltip text!
-			</div>
 		</div>
 		<div class="col-md-offset-1 col-md-4">
 			<div class="row" ng-if="userProfile.isFriend">

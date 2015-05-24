@@ -1,5 +1,5 @@
 socialNetwork.controller('PostsController', function($scope, $routeParams, UserService,
-	PostService, CommentService) {
+	PostService, CommentService, NotificationService) {
 
 	$scope.previewUser = function(user) {
 
@@ -68,9 +68,9 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			.then(function(result){
 				post.liked = true;
 				post.likesCount += 1;
-				console.log(result);
+				NotificationService.successNoty('Successfully liked post');
 			}, function(error){
-				console.log(error);
+				NotificationService.errorNoty('Error during liking post');
 			});
 	};
 
@@ -79,9 +79,9 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			.then(function(result){
 				post.liked = false;
 				post.likesCount -= 1;
-				console.log(result);
+				NotificationService.successNoty('Successfully unliked post');
 			}, function(error){
-				console.log(error);
+				NotificationService.errorNoty('Error during unliking post');
 			});
 	};
 
@@ -93,9 +93,9 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 
 		PostService.editPost(data)
 			.then(function(result){
-				console.log(result);
+				NotificationService.successNoty('Successfully edited post');
 			}, function(error){
-				console.log(error);
+				NotificationService.errorNoty('Error during editing post');
 			});
 	};
 
@@ -150,6 +150,7 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 				console.log(result);
 				post.shownAllComments = true;
 				post.comments = result.data;
+				NotificationService.successNoty('Successfully loaded all comments post');
 			}, function(error){
 				console.log(error);
 			});

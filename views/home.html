@@ -95,7 +95,7 @@
 				</li>
 			</ul>
 				<div class="text-center">
-					<button type="button" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
+					<button type="button" ng-if="newsFeed.length >= 5" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
 				</div>
 			</div>
 			<div ng-include="'views/commentLikesModal.html'"></div>
@@ -115,12 +115,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Friends - <a href="#/users/{{myProfile.username}}/friends">{{myProfile.totalCount}}</a> total</div>
 				<div class="panel-body">
-					<div class="friend" ng-repeat="friend in myProfile.friends">
-						<a href="#/users/{{friend.username}}">
-							<img class="friend col-md-4 thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="60" height="90">
-							<!-- <span>{{friend.name}}</span> -->
-						</a>
-					</div>
+					<div ng-repeat="friend in myProfile.friends">
+			        <a href="#/users/{{friend.username}}">
+			        <div class="panel panel-default col-md-4 text-center friend"><div class="panel-heading">{{friend.name}}</div><div class="panel-body"><img class="thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="110" height="90"></div></div></a>
+			      </div>
+					
 				</div>
 			</div>
 		</div>
