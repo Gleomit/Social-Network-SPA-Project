@@ -17,7 +17,7 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 	};
 
 	$scope.makeComment = function(event) {
-		
+
 	};
 
 	$scope.unlikeComment = function(post, comment) {
@@ -92,6 +92,26 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 				$scope.news.splice($scope.news.indexOf(post), 1);
 			}, function(error){
 
+			});
+	};
+
+	$scope.showCommentLikes = function(post, comment){
+		CommentService.getCommentLikes(post.id, comment.id)
+			.then(function(result){
+				$scope.commentLikes = result.data;
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
+	};
+
+	$scope.showPostLikes = function(post){
+		PostService.getPostLikes(post.id)
+			.then(function(result){
+				$scope.postLikes = result.data;
+				console.log(result);
+			}, function(error){
+				console.log(error);
 			});
 	};
 });

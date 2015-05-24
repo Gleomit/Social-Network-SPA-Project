@@ -34,12 +34,15 @@ socialNetwork.factory('PostService', function(baseUrl, getConfig, $q, $http) {
 	function deletePost(id) {
 		return $http.delete(serviceUrl + id, getConfig());
 	}
-	
+
 	return {
 		createPost: createPost,
 		deletePost: deletePost,
 		likePost: likePost,
 		unlikePost: unlikePost,
-		editPost: editPost
+		editPost: editPost,
+		getPostLikesPreview: getPostLikesPreview,
+		getPostLikes: getPostLikes,
+		getPost: getPost
 	};
 });

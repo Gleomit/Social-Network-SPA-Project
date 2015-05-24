@@ -27,8 +27,8 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 	function loadFriendsPreview() {
 		ProfileService.getFriendsPreview().then(function(result) {
 			console.log(result.data.friends)
-			$scope.friends = result.data.friends;
-			$scope.totalCount = result.data.totalCount;
+			$scope.myProfile.friends = result.data.friends;
+			$scope.myProfile.totalCount = result.data.totalCount;
 		}, function(error) {
 			console.log(error);
 		});

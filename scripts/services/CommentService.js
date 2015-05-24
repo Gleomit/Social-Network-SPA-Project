@@ -20,10 +20,10 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 	}
 
 	function getCommentLikes(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments/' + commentId + '/likes', getConfig());
+		return $http.get(serviceUrl + postId + '/comments/' + commentId + '/likes', getConfig());
 	}
 
-	function getCommentLikes(postId, commentId) {
+	function getCommentLikesPreview(postId, commentId) {
 		return $http.get(serviceUrl + id + '/comments/' + commentId + '/likes/preview', getConfig());
 	}
 
@@ -44,6 +44,8 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 		unlikeComment: unlikeComment,
 		deleteComment: deleteComment,
 		editComment: editComment,
-		getComments: getComments
+		getComments: getComments,
+		getCommentLikes: getCommentLikes,
+		getCommentLikesPreview: getCommentLikesPreview
 	};
 });

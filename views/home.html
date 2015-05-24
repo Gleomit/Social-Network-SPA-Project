@@ -33,7 +33,7 @@
 								{{post.postContent}}
 							</p>
 							<span>
-								<span>{{post.likesCount}}</span>
+								<span><button type="button" ng-click="showPostLikes(post)" data-toggle="modal" data-target="#postLikesModal">{{post.likesCount}}</button></span>
 								<span ng-if="!post.liked">
 									<span class="glyphicon glyphicon-thumbs-up"></span>
 									<button type="button" ng-click="likePost(post)">Like</button>
@@ -65,7 +65,7 @@
 										{{comment.commentContent}}
 									</p>
 									<span>
-										<span>{{comment.likesCount}}</span>
+										<span><button type="button" ng-click="showCommentLikes(post, comment)" data-toggle="modal" data-target="#commentLikesModal">{{comment.likesCount}}</button></span>
 										<span ng-if="!comment.liked">
 											<span class="glyphicon glyphicon-thumbs-up"></span>
 											<button type="button" ng-click="likeComment(post, comment)">Like</button>
@@ -81,28 +81,64 @@
 					</ul>
 				</li>
 			</ul>
-			
-		</div>
-		<div class="col-md-5">
-			<div class="row">
-				<div class="well">
-					<form accept-charset="UTF-8" class="text-center">
-						<textarea class="form-control" ng-model="postMessage" placeholder="Type in your message" ></textarea>
-						<button class="btn btn-info" ng-click="makePost(postMessage)" ng-disabled="postMessage.length <= 0" type="button">Post Message</button>
-					</form>
+			<div class="modal fade" id="commentLikesModal" tabindex="-1" role="dialog" aria-labelledby="commentLikesModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="commentLikesModalLabel">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							<span ng-repeat="commentLike in commentLikes">
+								{{commentLike.user.username}}
+							</span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">Friends - <a href="#/users/{{myProfile.username}}/friends">{{totalCount}}</a> total</div>
-				<div class="panel-body">
-					<div class="friend" ng-repeat="friend in friends">
-						<a href="#/users/{{friend.username}}">
-							<img class="friend col-md-4 thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="60" height="90">
-							<!-- <span>{{friend.name}}</span> -->
-						</a>
+			<div class="modal fade" id="postLikesModal" tabindex="-1" role="dialog" aria-labelledby="postLikesModal" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="postLikesModal">Modal title</h4>
+						</div>
+						<div class="modal-body">
+							<span ng-repeat="postLike in postLikes">
+								{{postLike.user.username}}
+							</span>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="col-md-5">
+		<div class="row">
+			<div class="well">
+				<form accept-charset="UTF-8" class="text-center">
+					<textarea class="form-control" ng-model="postMessage" placeholder="Type in your message" ></textarea>
+					<button class="btn btn-info" ng-click="makePost(postMessage)" ng-disabled="postMessage.length <= 0" type="button">Post Message</button>
+				</form>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">Friends - <a href="#/users/{{myProfile.username}}/friends">{{myProfile.totalCount}}</a> total</div>
+			<div class="panel-body">
+				<div class="friend" ng-repeat="friend in myProfile.friends">
+					<a href="#/users/{{friend.username}}">
+						<img class="friend col-md-4 thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="60" height="90">
+						<!-- <span>{{friend.name}}</span> -->
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
