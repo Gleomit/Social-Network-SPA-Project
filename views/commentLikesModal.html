@@ -14,7 +14,12 @@
 							</p>
 						</div>
 						<div class="col-lg-8">
-							<p class="text-left"><a href="#/users/{{commentLike.user.username}}"><strong>{{commentLike.user.username}}</strong></p></a>
+							<p class="text-left"><a data-dismiss="modal" href="#/users/{{commentLike.user.username}}"><strong>{{commentLike.user.username}}</strong></p></a>
+							<p>
+								<span ng-if="commentLike.user.gender == 1"><img src="http://www.grammar-quizzes.com/img/male.gif"></span>
+								<span ng-if="commentLike.user.gender == -1"><img src="http://petvet.bg/uploads/data/female.gif"></span>
+								<span ng-if="commentLike.user.gender == 0">Other</span>
+							</p>
 						</div>
 					</div>
 				</div>

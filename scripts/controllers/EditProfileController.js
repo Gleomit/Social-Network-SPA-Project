@@ -50,6 +50,7 @@ socialNetwork.controller('EditProfileController', function($scope, ProfileServic
 				reader = new FileReader();
 				reader.onload = function() {
 					$('#coverPicture').attr('src', reader.result);
+					$scope.edit.coverImageData = reader.result;
 				};
 				reader.readAsDataURL(file);
 			} else {
@@ -65,6 +66,7 @@ socialNetwork.controller('EditProfileController', function($scope, ProfileServic
 				reader = new FileReader();
 				reader.onload = function() {
 					$('#profilePicture').attr('src', reader.result);
+					$scope.edit.profileImageData = reader.result;
 				};
 				reader.readAsDataURL(file);
 			} else {

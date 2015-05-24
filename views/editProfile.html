@@ -4,7 +4,7 @@
 <div class="col-md-offset-1 col-md-10" ng-controller="EditProfileController">
 	<div class="col-md-3 text-center">
 		<figure>
-			<img src="{{edit.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="150" height="150" alt="Cannot load image" id="profilePicture">
+			<img src="{{edit.profileImageData}}" width="150" height="150" alt="Upload image" id="profilePicture">
 			<p>Allowed format: .jpg</p>
 			<p>Limit: 128kb</p>
 		</figure>
@@ -46,11 +46,11 @@
 					<p>Limit: 1024kb</p>
 				</div>
 				<div class="col-md-3">
-					<img ng-src="edit.coverImageData" width="265" id="coverPicture" height="100">
+					<img src="{{edit.coverImageData}}" width="265" id="coverPicture" alt="Upload image" height="100">
 				</div>
 			</div>
 			<div class="form-group">
-				<a href="#" class="btn btn-info pull-right" ng-disabled="!editForm.$valid">Save Changes</a>
+				<button class="btn btn-info pull-right" type="button" ng-click="editProfile()" ng-disabled="!editForm.$valid">Save Changes</button>
 			</div>
 		</form>
 	</div>

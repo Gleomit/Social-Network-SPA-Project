@@ -5,6 +5,13 @@ socialNetwork.controller('HeaderController', function($scope, $location,
 	$scope.Me = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : undefined);
 	$scope.searchResults = [];
 
+	ProfileService.getProfile()
+		.then(function(result){
+
+		}, function(error){
+			
+		});
+
 	$scope.Logout = function() {
 		UserService.logout()
 			.then(function(result) {
