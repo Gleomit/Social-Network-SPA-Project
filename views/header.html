@@ -1,4 +1,4 @@
-<header ng-if="mainCtrl.Logged == true" class="row" ng-controller="HeaderController">
+<header ng-if="mainCtrl.Logged == true" class="row" ng-controller="HeaderController" >
 	<div class="navbar navbar-default" role="navigation">
 		
 		<div class="navbar-header">
@@ -9,12 +9,14 @@
 			<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="#/">
-				<img class="thumbnail" src="{{Me.profileImage || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="Cannot load image">
+				<img class="thumbnail" src="{{Me.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="Cannot load image">
 			</a>
 		</div>
 		
 		<div class="collapse navbar-collapse">
+		<span class="pull-left profile.username">{{Me.username}}</span>
 			<ul class="nav navbar-nav">
+
 				<li><a href="#/home" class="btn btn-default glyphicon glyphicon-home"></a></li>
 				<li class="dropdown">
 					<a href="#" ng-click="getFriendRequests($event)" class="btn btn-default dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"></a>

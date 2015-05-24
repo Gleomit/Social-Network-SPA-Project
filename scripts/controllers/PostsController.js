@@ -102,9 +102,11 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 	$scope.deletePost = function(post) {
 		PostService.deletePost(post.id)
 			.then(function(result){
+				NotificationService.successNoty('Successfully deleted post');
 				$scope.$parent.newsFeed.splice($scope.$parent.newsFeed.indexOf(post), 1);
 				console.log(result);
 			}, function(error){
+				NotificationService.errorNoty('Error during deleting post');
 				console.log(error);
 			});
 	};

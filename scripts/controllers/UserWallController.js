@@ -2,7 +2,6 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 
 socialNetwork.controller('UserWallController', function($scope, $routeParams, $location,
 	UserService, ProfileService, NotificationService, PostService) {
-	$scope.startPostId = 0;
 	$scope.pageSize = 5;
 	$scope.userProfile = {};
 
@@ -29,7 +28,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			pageSize: $scope.pageSize,
 			username: $routeParams.username
 		};
-		
+
 		$scope.myProfile = JSON.parse(sessionStorage['user']);
 
 		UserService.userInfo(userData.username)
@@ -65,7 +64,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			pageSize: $scope.pageSize,
 			username: $routeParams.username
 		};
-		
+
 		UserService.userWall(userData)
 			.then(function(result) {
 				console.log(result)
@@ -86,8 +85,10 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			.then(function(result){
 				$('textarea').val("");
 				$scope.newsFeed.unshift(result.data);
+				NotificationService.successNoty('Successfully added post');
 				console.log(result);
 			}, function(error){
+				NotificationService.errorNoty('Error during adding post');
 				console.log(error);
 			});
 	};
@@ -101,12 +102,14 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 
 		UserService.userWall(userData)
 			.then(function(result) {
+				NotificationService.successNoty('Successfully loaded more 5 posts');
 				console.log(result)
 				for(var i = 0; i < result.data.length; i += 1) {
 					$scope.newsFeed.push(result.data[i]);
 				}
 				
 			}, function(error) {
+				NotificationService.errorNoty('Error during loading more posts');
 				console.log(error);
 				//NotificationService.success('Failed loading user wall information.');
 			});

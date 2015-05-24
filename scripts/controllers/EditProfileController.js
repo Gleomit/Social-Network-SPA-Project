@@ -16,8 +16,10 @@ socialNetwork.controller('EditProfileController', function($scope, ProfileServic
 		ProfileService.editProfile(dataToSave)
 			.then(function(result) {
 				console.log(result);
+				NotificationService.successNoty('Successfully edited profile');
 			}, function(error) {
 				console.log(error);
+				NotificationService.errorNoty('Error during editing profile');
 			});
 	};
 

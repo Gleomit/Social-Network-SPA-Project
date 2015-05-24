@@ -2,14 +2,13 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 
 socialNetwork.controller('HeaderController', function($scope, $location,
 	UserService, ProfileService, NotificationService) {
-	$scope.Me = (sessionStorage['user'] ? JSON.parse(sessionStorage['user']) : undefined);
 	$scope.searchResults = [];
 
 	ProfileService.getProfile()
 		.then(function(result){
-
+			$scope.Me = result.data;
 		}, function(error){
-			
+
 		});
 
 	$scope.Logout = function() {
@@ -17,7 +16,7 @@ socialNetwork.controller('HeaderController', function($scope, $location,
 			.then(function(result) {
 				$scope.mainCtrl.Logged = false;
 				$location.path('/');
-				NotificationService.success("Successfully logged out.");
+				NotificationService.successNoty("Successfully logged out.");
 			}, function(error) {
 				console.log(error);
 				$scope.mainCtrl.Logged = false;

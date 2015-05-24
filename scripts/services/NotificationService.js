@@ -11,17 +11,19 @@ socialNetwork.factory('NotificationService', function() {
 			closeWith: ['click']
 		});
 	}
-	
+
+	console.log(noty)
+
 	function successNoty (text){
 		notify('success', 'topRight', text, 2000);	
 	}
 	
-	function errorNoty (layout, text){
-		notify('error', layout, text, 4000);	
+	function errorNoty (text){
+		notify('error', 'textLeft', text, 4000);	
 	}
 
 	return {
-		error: errorNoty,
-		success: successNoty
+		errorNoty: errorNoty,
+		successNoty: successNoty
 	};
 });

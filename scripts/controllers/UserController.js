@@ -13,9 +13,10 @@ socialNetwork.controller('UserController', function($scope, UserService, Notific
 			.then(function(result) {
 				$scope.mainCtrl.Logged = true;
 				$scope.myProfile = result;
+				NotificationService.successNoty('Successfully logged in.');
 				resetLogin();
 			}, function(error) {
-				console.log(error);
+				NotificationService.errorNoty('Wrong username/password.');
 				resetLogin();
 			});
 	};
@@ -33,6 +34,7 @@ socialNetwork.controller('UserController', function($scope, UserService, Notific
 		UserService.register(registerData)
 			.then(function(result) {
 				$scope.mainCtrl.Logged = true;
+				NotificationService.successNoty('Successfully registered and logged in.');
 				resetRegister();
 			}, function(error) {
 				console.log(error);
