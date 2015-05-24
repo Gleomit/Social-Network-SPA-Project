@@ -16,10 +16,16 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			});
 	};
 
-	$scope.makeComment = function(post, commentContent) {
-		CommentService.createComment(post.id, commentContent)
+	$scope.makeComment = function(post) {
+		CommentService.createComment(post.id, {commentContent: post.commentBox})
 			.then(function(result){
-				console.log(result);
+				post.commentBox = "";
+				post.totalCommentsCount += 1;
+				post.comments.unshift(result.data);
+				if(post.comments.length > 3){
+					post.comments.splice(post.commentBox.length - 1, 1);
+				}
+				$('#' + post.id).slideUp();
 			}, function(error){
 				console.log(error);
 			});
@@ -50,6 +56,7 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 		CommentService.deleteComment(post.id, comment.id)
 			.then(function(result){
 				post.comments.splice(post.comments.indexOf(comment), 1);
+				post.totalCommentsCount -= 1;
 				console.log(result);
 			}, function(error){
 				console.log(error);
@@ -130,4 +137,8 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 		$scope.postToEdit = comment;
 		$scope.postToEdit.belongPost = post;
 	};
+
+	$scope.showAddComment = function(selector){
+		$('#' + selector).slideToggle();
+	}
 });

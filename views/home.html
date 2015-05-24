@@ -18,10 +18,11 @@
 	</div>
 	<div ng-controller="NewsFeedController">
 		<div class="col-md-7 userNews" ng-controller="PostsController">
+			<div>
 			<ul class="media-list">
 				<li class="media post" ng-repeat="post in newsFeed" data-id="{{post.id}}">
 					<a class="pull-left" href="#">
-						<img class="media-object img-square" src="{{post.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+						<img class="media-object img-square" class="postProfileImage" src="{{post.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
 					</a>
 					<div class="media-body">
 						<div class="well well-lg">
@@ -42,6 +43,7 @@
 									<span class="glyphicon glyphicon-thumbs-down"></span>
 									<button type="button" ng-click="unlikePost(post)">Unlike</button>
 								</span>
+								<button type="button" ng-click="showAddComment(post.id)">Comment</button>
 							</span>
 							<a data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> {{post.totalCommentsCount}} comments</a>
 							<button type="button" class="btn btn-danger" ng-click="deletePost(post)">Delete</button>
@@ -49,11 +51,15 @@
 								<button type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#postToEditModal" ng-click="showEditPost(post)">Edit</button>
 							</span>
 						</div>
+						<div id="{{post.id}}" class="text-right commentBox">
+							<textarea class="form-control" ng-model="post.commentBox"></textarea>
+							<button type="button" ng-disabled="post.commentBox.length <= 1 || !post.commentBox" ng-click="makeComment(post)" class="btn btn-info">Add Comment</button>
+						</div>
 					</div>
 					<ul class="media-list">
 						<li class="media media-replied comment" ng-repeat="comment in post.comments" data-id="{{comment.id}}">
 							<a class="pull-left" href="#">
-								<img class="media-object img-square" src="{{comment.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+								<img class="media-object img-square" class="commentProfileImage" src="{{comment.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
 							</a>
 							<div class="media-body">
 								<div class="well well-lg">
@@ -74,6 +80,11 @@
 											<span class="glyphicon glyphicon-thumbs-down"></span>
 											<button type="button" ng-click="unlikeComment(post, comment)">Unlike</button>
 										</span>
+										<span ng-if="comment.author.username == myProfile.username">
+											<!-- <span class="glyphicon glyphicon-thumbs-down"></span> -->
+											<button type="button" class="btn btn-danger" ng-click="deleteComment(post, comment)">Delete</button>
+											<button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentToEditModal" ng-click="showEditComment(post, comment)">Edit</button>
+										</span>
 									</span>
 								</div>
 							</div>
@@ -81,6 +92,10 @@
 					</ul>
 				</li>
 			</ul>
+				<div class="text-right">
+					<button type="button" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
+				</div>
+			</div>
 			<div class="modal fade" id="commentLikesModal" tabindex="-1" role="dialog" aria-labelledby="commentLikesModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">

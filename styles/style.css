@@ -200,3 +200,17 @@ input[type="file"] {
 .friend, .friendsView{
 	padding:0;
 }
+
+.postProfileImage{
+	width: 100px;
+	height: 100px;
+}
+
+.commentProfileImage{
+	width: 70px;
+	height: 70px;
+}
+
+.commentBox{
+	display: none;
+}

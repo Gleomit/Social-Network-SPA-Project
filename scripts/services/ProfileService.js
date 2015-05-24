@@ -24,7 +24,7 @@ socialNetwork.factory('ProfileService', function(baseUrl, getConfig, $q, $http) 
 	}
 
 	function getFeedNews(newsData) {
-		return $http.get(serviceUrl + 'feed?StartPostId=&PageSize=' + newsData.pageSize, getConfig());
+		return $http.get(serviceUrl + 'feed?StartPostId=' + newsData.startPostId + '&PageSize=' + newsData.pageSize, getConfig());
 	}
 
 	function getFriendRequests(respondData) {

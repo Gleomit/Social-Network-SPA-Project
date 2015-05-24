@@ -61,7 +61,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 
 	function loadUserWall() {
 		var userData = {
-			startPostId: $scope.startPostId,
+			startPostId: '',
 			pageSize: $scope.pageSize,
 			username: $routeParams.username
 		};
@@ -89,6 +89,26 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 				console.log(result);
 			}, function(error){
 				console.log(error);
+			});
+	};
+
+	$scope.loadMoreNews = function() {
+		var userData = {
+			startPostId: $scope.newsFeed[$scope.newsFeed.length - 1].id,
+			pageSize: $scope.pageSize,
+			username: $routeParams.username
+		};
+
+		UserService.userWall(userData)
+			.then(function(result) {
+				console.log(result)
+				for(var i = 0; i < result.data.length; i += 1) {
+					$scope.newsFeed.push(result.data[i]);
+				}
+				
+			}, function(error) {
+				console.log(error);
+				//NotificationService.success('Failed loading user wall information.');
 			});
 	};
 });

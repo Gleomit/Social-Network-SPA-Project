@@ -3,7 +3,7 @@ var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRout
 socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 	NotificationService, PostService) {
 	$scope.startPostId = 0;
-	$scope.pageSize = 10;
+	$scope.pageSize = 5;
 
 	loadNewsFeed();
 	loadFriendsPreview();
@@ -11,7 +11,7 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 	function loadNewsFeed() {
 		$scope.myProfile = JSON.parse(sessionStorage['user']);
 		var newsData = {
-			startPostId: $scope.startPostId,
+			startPostId: '',
 			pageSize: $scope.pageSize
 		};
 
@@ -46,6 +46,24 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 				$scope.newsFeed.unshift(result.data);
 				console.log(result);
 			}, function(error){
+				console.log(error);
+			});
+	};
+
+	$scope.loadMoreNews = function() {
+		var newsData = {
+			startPostId: $scope.newsFeed[$scope.newsFeed.length - 1].id,
+			pageSize: $scope.pageSize
+		};
+
+		ProfileService.getFeedNews(newsData)
+			.then(function(result) {
+				console.log(result)
+				$scope.newsFeed = result.data;
+				for(var i = 0; i < result.data.length; i += 1) {
+					$scope.newsFeed.push(result.data[i]);
+				}
+			}, function(error) {
 				console.log(error);
 			});
 	};
