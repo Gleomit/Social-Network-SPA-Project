@@ -7,16 +7,16 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 		return $http.get(serviceUrl + id + '/comments', getConfig());
 	}
 
-	function commentPost(postId, commentData) {
-		return $http.post(serviceUrl + id + '/comments', commentData, getConfig());
+	function createComment(postId, commentData) {
+		return $http.post(serviceUrl + postId + '/comments', commentData, getConfig());
 	}
 
 	function editComment(postId, commentId, commentData) {
-		return $http.put(serviceUrl + id + '/comments/' + commentId, commentData, getConfig());
+		return $http.put(serviceUrl + postId + '/comments/' + commentId, commentData, getConfig());
 	}
 
 	function deleteComment(postId, commentId) {
-		return $http.delete(serviceUrl + id + '/comments/' + commentId, getConfig());
+		return $http.delete(serviceUrl + postId + '/comments/' + commentId, getConfig());
 	}
 
 	function getCommentLikes(postId, commentId) {
@@ -24,7 +24,7 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 	}
 
 	function getCommentLikesPreview(postId, commentId) {
-		return $http.get(serviceUrl + id + '/comments/' + commentId + '/likes/preview', getConfig());
+		return $http.get(serviceUrl + postId + '/comments/' + commentId + '/likes/preview', getConfig());
 	}
 
 	function getPostLikesPreview(id) {
@@ -46,6 +46,7 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 		editComment: editComment,
 		getComments: getComments,
 		getCommentLikes: getCommentLikes,
-		getCommentLikesPreview: getCommentLikesPreview
+		getCommentLikesPreview: getCommentLikesPreview,
+		createComment: createComment
 	};
 });

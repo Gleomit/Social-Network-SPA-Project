@@ -1,7 +1,7 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
 socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
-	NotificationService, PostService, CommentService) {
+	NotificationService, PostService) {
 	$scope.startPostId = 0;
 	$scope.pageSize = 10;
 
@@ -18,7 +18,7 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 		ProfileService.getFeedNews(newsData)
 			.then(function(result) {
 				console.log(result)
-				$scope.news = result.data;
+				$scope.newsFeed = result.data;
 			}, function(error) {
 				console.log(error);
 			});
@@ -33,4 +33,20 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 			console.log(error);
 		});
 	}
+
+	$scope.makePost = function(message) {
+		var data = {
+			postContent: message,
+			username: $scope.myProfile.username
+		};
+
+		PostService.createPost(data)
+			.then(function(result){
+				message = "";
+				$scope.newsFeed.unshift(result.data);
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
+	};
 });

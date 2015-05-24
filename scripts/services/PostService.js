@@ -27,8 +27,8 @@ socialNetwork.factory('PostService', function(baseUrl, getConfig, $q, $http) {
 		return $http.post(serviceUrl, postData, getConfig());
 	}
 
-	function editPost(id) {
-		return $http.put(serviceUrl + id, getConfig());
+	function editPost(data) {
+		return $http.put(serviceUrl + data.id, data, getConfig());
 	}
 
 	function deletePost(id) {

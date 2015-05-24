@@ -16,8 +16,13 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			});
 	};
 
-	$scope.makeComment = function(event) {
-
+	$scope.makeComment = function(post, commentContent) {
+		CommentService.createComment(post.id, commentContent)
+			.then(function(result){
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
 	};
 
 	$scope.unlikeComment = function(post, comment) {
@@ -31,7 +36,13 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			});
 	};
 
-	$scope.editComment = function(event) {
+	$scope.editComment = function(comment) {
+		CommentService.editPost(comment.belongPost.id, comment.id, comment.commentContent)
+			.then(function(result){
+				console.log(result);
+			}, function(error){
+				console.log(error);
+			});
 
 	};
 
@@ -67,31 +78,27 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			});
 	};
 
-	$scope.editPost = function(event) {
-
-	};
-
-	$scope.makePost = function(message) {
+	$scope.editPost = function(post) {
 		var data = {
-			postContent: message,
-			username: $scope.myProfile.username
+			id: post.id,
+			postContent: post.postContent
 		};
 
-		PostService.createPost(data)
-			.then(function(result) {
+		PostService.editPost(data)
+			.then(function(result){
 				console.log(result);
-			}, function(error) {
+			}, function(error){
 				console.log(error);
 			});
 	};
 
 	$scope.deletePost = function(post) {
-		event.preventDefault();
 		PostService.deletePost(post.id)
 			.then(function(result){
-				$scope.news.splice($scope.news.indexOf(post), 1);
+				$scope.$parent.newsFeed.splice($scope.$parent.newsFeed.indexOf(post), 1);
+				console.log(result);
 			}, function(error){
-
+				console.log(error);
 			});
 	};
 
@@ -113,5 +120,14 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 			}, function(error){
 				console.log(error);
 			});
+	};
+
+	$scope.showEditPost = function(post){
+		$scope.postToEdit = post;
+	};
+
+	$scope.showCommentEdit = function(post, comment){
+		$scope.postToEdit = comment;
+		$scope.postToEdit.belongPost = post;
 	};
 });

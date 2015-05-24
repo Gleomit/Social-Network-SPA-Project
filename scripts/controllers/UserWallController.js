@@ -1,7 +1,7 @@
 var socialNetwork = socialNetwork || angular.module('socialNetworkApp', ['ngRoute']);
 
 socialNetwork.controller('UserWallController', function($scope, $routeParams, $location,
-	UserService, ProfileService, NotificationService, PostService, CommentService) {
+	UserService, ProfileService, NotificationService, PostService) {
 	$scope.startPostId = 0;
 	$scope.pageSize = 5;
 	$scope.userProfile = {};
@@ -51,7 +51,6 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 	function loadFriendsPreview() {
 		UserService.userFriendsPreview($scope.userProfile.username)
 			.then(function(result) {
-				console.log(result)
 				$scope.userProfile.friendsTotal = result.data.totalCount;
 				$scope.userProfile.friends = result.data.friends;
 			}, function(error) {
@@ -70,7 +69,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 		UserService.userWall(userData)
 			.then(function(result) {
 				console.log(result)
-				$scope.userProfile.posts = result.data;
+				$scope.newsFeed = result.data;
 			}, function(error) {
 				console.log(error);
 				//NotificationService.success('Failed loading user wall information.');
@@ -85,6 +84,8 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 
 		PostService.createPost(data)
 			.then(function(result){
+				$('textarea').val("");
+				$scope.newsFeed.unshift(result.data);
 				console.log(result);
 			}, function(error){
 				console.log(error);
