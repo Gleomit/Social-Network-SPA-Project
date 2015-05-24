@@ -1,0 +1,28 @@
+<div class="modal fade" id="postLikesModal" tabindex="-1" role="dialog" aria-labelledby="postLikesModal" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="postLikesModal">Post Likes</h4>
+			</div>
+			<div class="modal-body">
+				<div class="navbar-login" ng-repeat="postLike in postLikes">
+					<div class="row">
+						<div class="col-lg-4">
+							<p class="text-center">
+								<img src="{{postLike.user.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="70" height="70" alt="" />
+							</p>
+						</div>
+						<div class="col-lg-8">
+							<p class="text-left"><a href="#/users/{{postLike.user.username}}"><strong>{{postLike.user.username}}</strong></p></a>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

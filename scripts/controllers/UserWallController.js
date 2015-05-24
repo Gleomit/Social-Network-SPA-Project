@@ -29,7 +29,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			pageSize: $scope.pageSize,
 			username: $routeParams.username
 		};
-
+		
 		$scope.myProfile = JSON.parse(sessionStorage['user']);
 
 		UserService.userInfo(userData.username)
@@ -65,7 +65,7 @@ socialNetwork.controller('UserWallController', function($scope, $routeParams, $l
 			pageSize: $scope.pageSize,
 			username: $routeParams.username
 		};
-
+		
 		UserService.userWall(userData)
 			.then(function(result) {
 				console.log(result)

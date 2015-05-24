@@ -43,7 +43,7 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 	};
 
 	$scope.editComment = function(comment) {
-		CommentService.editPost(comment.belongPost.id, comment.id, comment.commentContent)
+		CommentService.editComment(comment.belongPost.id, {id: comment.id, commentContent: comment.commentContent})
 			.then(function(result){
 				console.log(result);
 			}, function(error){
@@ -134,11 +134,22 @@ socialNetwork.controller('PostsController', function($scope, $routeParams, UserS
 	};
 
 	$scope.showCommentEdit = function(post, comment){
-		$scope.postToEdit = comment;
-		$scope.postToEdit.belongPost = post;
+		$scope.commentToEdit = comment;
+		$scope.commentToEdit.belongPost = post;
 	};
 
 	$scope.showAddComment = function(selector){
 		$('#' + selector).slideToggle();
 	}
+
+	$scope.getAllComents = function(post){
+		CommentService.getComments(post.id)
+			.then(function(result){
+				console.log(result);
+				post.shownAllComments = true;
+				post.comments = result.data;
+			}, function(error){
+				console.log(error);
+			});
+	};
 });

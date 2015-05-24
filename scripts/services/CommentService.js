@@ -4,15 +4,15 @@ socialNetwork.factory('CommentService', function($q, $http, baseUrl, getConfig) 
 	var serviceUrl = baseUrl + 'Posts/';
 
 	function getComments(postId) {
-		return $http.get(serviceUrl + id + '/comments', getConfig());
+		return $http.get(serviceUrl + postId + '/comments', getConfig());
 	}
 
 	function createComment(postId, commentData) {
 		return $http.post(serviceUrl + postId + '/comments', commentData, getConfig());
 	}
 
-	function editComment(postId, commentId, commentData) {
-		return $http.put(serviceUrl + postId + '/comments/' + commentId, commentData, getConfig());
+	function editComment(postId, commentData) {
+		return $http.put(serviceUrl + postId + '/comments/' + commentData.id, commentData, getConfig());
 	}
 
 	function deleteComment(postId, commentId) {

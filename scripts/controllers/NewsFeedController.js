@@ -59,7 +59,6 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 		ProfileService.getFeedNews(newsData)
 			.then(function(result) {
 				console.log(result)
-				$scope.newsFeed = result.data;
 				for(var i = 0; i < result.data.length; i += 1) {
 					$scope.newsFeed.push(result.data[i]);
 				}
