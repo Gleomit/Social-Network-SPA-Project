@@ -27,7 +27,6 @@ socialNetwork.run( function($rootScope, $location) {
         if ( next.templateUrl == "views/home.html" ) {
           // already going to #login, no redirect needed
         } else {
-          // not going to #login, we should redirect now
           $location.path( "/" );
         }
       }         
