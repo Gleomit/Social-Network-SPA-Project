@@ -14,7 +14,7 @@ socialNetwork.controller('NewsFeedController', function($scope, ProfileService,
 			startPostId: '',
 			pageSize: $scope.pageSize
 		};
-		console.log($scope.myProfile)
+
 		ProfileService.getFeedNews(newsData)
 			.then(function(result) {
 				console.log(result)

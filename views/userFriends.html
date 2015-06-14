@@ -13,5 +13,5 @@
         </div>
       </div>
     </div>
-    <h1 ng-if="!userProfile.isFriend && !userProfile.username == myProfile.username">You must be friend with {{userProfile.username}} in order to see his friends</h1>
+    <h1 ng-if="!userProfile.isFriend || !userProfile.username == myProfile.username">You must be friend with {{userProfile.username}} in order to see his friends</h1>
   </div>

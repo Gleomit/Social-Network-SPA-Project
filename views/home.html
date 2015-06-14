@@ -19,81 +19,81 @@
 	<div ng-controller="NewsFeedController">
 		<div class="col-md-7 userNews" ng-controller="PostsController">
 			<div>
-			<ul class="media-list">
-				<li class="media post" ng-repeat="post in newsFeed" data-id="{{post.id}}">
-					<a class="pull-left" href="#">
-						<img class="media-object img-square" class="postProfileImage" src="{{post.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
-					</a>
-					<div class="media-body">
-						<div class="well well-lg">
-							<h4 class="media-heading reviews"><a href="#/users/{{post.author.username}}">{{post.author.username}}</a></h4>
-							<div class="media-date text-uppercase reviews list-inline">
-								{{post.date | date: 'short'}}
-							</div>
-							<p class="media-comment">
-								{{post.postContent}}
-							</p>
-							<span>
-								<span><button type="button" ng-click="showPostLikes(post)" data-toggle="modal" data-target="#postLikesModal">{{post.likesCount}}</button></span>
-								<span ng-if="!post.liked">
-									<span class="glyphicon glyphicon-thumbs-up"></span>
-									<button type="button" ng-click="likePost(post)">Like</button>
-								</span>
-								<span ng-if="post.liked">
-									<span class="glyphicon glyphicon-thumbs-down"></span>
-									<button type="button" ng-click="unlikePost(post)">Unlike</button>
-								</span>
-								<button type="button" ng-click="showAddComment(post.id)">Comment</button>
-							</span>
-							<a data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> {{post.totalCommentsCount}} comments</a>
-							<button type="button" class="btn btn-danger" ng-click="deletePost(post)">Delete</button>
-							<span ng-if="post.author.username == myProfile.username">
-								<button type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#postToEditModal" ng-click="showEditPost(post)">Edit</button>
-							</span>
-						</div>
-						<div id="{{post.id}}" class="text-right commentBox">
-							<textarea class="form-control" ng-model="post.commentBox"></textarea>
-							<button type="button" ng-disabled="post.commentBox.length <= 1 || !post.commentBox" ng-click="makeComment(post)" class="btn btn-info">Add Comment</button>
-						</div>
-					</div>
-					<ul class="media-list">
-						<li class="media media-replied comment" ng-repeat="comment in post.comments" data-id="{{comment.id}}">
-							<a class="pull-left" href="#">
-								<img class="media-object img-square" class="commentProfileImage" src="{{comment.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
-							</a>
-							<div class="media-body">
-								<div class="well well-lg">
-									<h4 class="media-heading reviews"><span class="glyphicon glyphicon-share-alt"></span><a href="#/users/{{comment.author.username}}">{{comment.author.username}}</a></h4>
-									<div class="media-date text-uppercase reviews list-inline">
-										{{comment.date | date: 'short'}}
-									</div>
-									<p class="media-comment">
-										{{comment.commentContent}}
-									</p>
-									<span>
-										<span><button type="button" ng-click="showCommentLikes(post, comment)" data-toggle="modal" data-target="#commentLikesModal">{{comment.likesCount}}</button></span>
-										<span ng-if="!comment.liked">
-											<span class="glyphicon glyphicon-thumbs-up"></span>
-											<button type="button" ng-click="likeComment(post, comment)">Like</button>
-										</span>
-										<span ng-if="comment.liked">
-											<span class="glyphicon glyphicon-thumbs-down"></span>
-											<button type="button" ng-click="unlikeComment(post, comment)">Unlike</button>
-										</span>
-										<span ng-if="comment.author.username == myProfile.username">
-											<button type="button" class="btn btn-danger" ng-click="deleteComment(post, comment)">Delete</button>
-											<button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentToEditModal" ng-click="showEditComment(post, comment)">Edit</button>
-										</span>
-									</span>
+				<ul class="media-list">
+					<li class="media post" ng-repeat="post in newsFeed" data-id="{{post.id}}">
+						<a class="pull-left" href="#">
+							<img class="media-object img-square" class="postProfileImage" src="{{post.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+						</a>
+						<div class="media-body">
+							<div class="well well-lg">
+								<h4 class="media-heading reviews"><a href="#/users/{{post.author.username}}">{{post.author.username}}</a></h4>
+								<div class="media-date text-uppercase reviews list-inline">
+									{{post.date | date: 'short'}}
 								</div>
+								<p class="media-comment">
+									{{post.postContent}}
+								</p>
+								<span>
+									<span><button type="button" ng-click="showPostLikes(post)" data-toggle="modal" data-target="#postLikesModal">{{post.likesCount}}</button></span>
+									<span ng-if="!post.liked">
+										<span class="glyphicon glyphicon-thumbs-up"></span>
+										<button type="button" ng-click="likePost(post)">Like</button>
+									</span>
+									<span ng-if="post.liked">
+										<span class="glyphicon glyphicon-thumbs-down"></span>
+										<button type="button" ng-click="unlikePost(post)">Unlike</button>
+									</span>
+									<button type="button" ng-click="showAddComment(post.id)">Comment</button>
+								</span>
+								<a data-toggle="collapse" href="#replyOne"><span class="glyphicon glyphicon-comment"></span> {{post.totalCommentsCount}} comments</a>
+								<button type="button" class="btn btn-danger" ng-click="deletePost(post)">Delete</button>
+								<span ng-if="post.author.username == myProfile.username">
+									<button type="button" href="#" class="btn btn-info" data-toggle="modal" data-target="#postToEditModal" ng-click="showEditPost(post)">Edit</button>
+								</span>
 							</div>
-						</li>
-					</ul>
-					<div class="text-right">
-						<button type="button" class="btn btn-info" ng-if="!post.shownAllComments && post.totalCommentsCount > 3" ng-click="getAllComents(post)">Load All Comments</button>
-					</div>
-				</li>
-			</ul>
+							<div id="{{post.id}}" class="text-right commentBox">
+								<textarea class="form-control" ng-model="post.commentBox"></textarea>
+								<button type="button" ng-disabled="post.commentBox.length <= 1 || !post.commentBox" ng-click="makeComment(post)" class="btn btn-info">Add Comment</button>
+							</div>
+						</div>
+						<ul class="media-list">
+							<li class="media media-replied comment" ng-repeat="comment in post.comments" data-id="{{comment.id}}">
+								<a class="pull-left" href="#">
+									<img class="media-object img-square" class="commentProfileImage" src="{{comment.author.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" alt="profile">
+								</a>
+								<div class="media-body">
+									<div class="well well-lg">
+										<h4 class="media-heading reviews"><span class="glyphicon glyphicon-share-alt"></span><a href="#/users/{{comment.author.username}}">{{comment.author.username}}</a></h4>
+										<div class="media-date text-uppercase reviews list-inline">
+											{{comment.date | date: 'short'}}
+										</div>
+										<p class="media-comment">
+											{{comment.commentContent}}
+										</p>
+										<span>
+											<span><button type="button" ng-click="showCommentLikes(post, comment)" data-toggle="modal" data-target="#commentLikesModal">{{comment.likesCount}}</button></span>
+											<span ng-if="!comment.liked">
+												<span class="glyphicon glyphicon-thumbs-up"></span>
+												<button type="button" ng-click="likeComment(post, comment)">Like</button>
+											</span>
+											<span ng-if="comment.liked">
+												<span class="glyphicon glyphicon-thumbs-down"></span>
+												<button type="button" ng-click="unlikeComment(post, comment)">Unlike</button>
+											</span>
+											<span ng-if="comment.author.username == myProfile.username">
+												<button type="button" class="btn btn-danger" ng-click="deleteComment(post, comment)">Delete</button>
+												<button type="button" class="btn btn-info" data-toggle="modal" data-target="#commentToEditModal" ng-click="showCommentEdit(post, comment)">Edit</button>
+											</span>
+										</span>
+									</div>
+								</div>
+							</li>
+						</ul>
+						<div class="text-right">
+							<button type="button" class="btn btn-info" ng-if="!post.shownAllComments && post.totalCommentsCount > 3" ng-click="getAllComents(post)">Load All Comments</button>
+						</div>
+					</li>
+				</ul>
 				<div class="text-center">
 					<button type="button" ng-if="newsFeed.length >= 5" class="btn btn-info" ng-click="loadMoreNews()">Load More..</button>
 				</div>
@@ -101,7 +101,7 @@
 			<div ng-include="'views/commentLikesModal.html'"></div>
 			<div ng-include="'views/postLikesModal.html'"></div>
 			<div ng-include="'views/commentEditModal.html'"></div>
-			<div ng-include="'views/postEditModal.html'"></div>	
+			<div ng-include="'views/postEditModal.html'"></div>
 		</div>
 		<div class="col-md-5">
 			<div class="row">
@@ -116,12 +116,11 @@
 				<div class="panel-heading">Friends - <a href="#/users/{{myProfile.username}}/friends">{{myProfile.totalCount}}</a> total</div>
 				<div class="panel-body">
 					<div ng-repeat="friend in myProfile.friends">
-			        <a href="#/users/{{friend.username}}">
-			        <div class="panel panel-default col-md-4 text-center friend"><div class="panel-heading">{{friend.name}}</div><div class="panel-body"><img class="thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="110" height="90"></div></div></a>
-			      </div>
-					
+						<a href="#/users/{{friend.username}}">
+							<div class="panel panel-default col-md-4 text-center friend"><div class="panel-heading">{{friend.name}}</div><div class="panel-body"><img class="thumbnail" src="{{friend.profileImageData || 'http://www.sanluisvalleyhealth.org/sites/default/files/styles/physician_thumbnail/public/default_images/person-placeholder.jpg?itok=O6F7E8DG'}}" width="110" height="90"></div></div></a>
+						</div>	
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
